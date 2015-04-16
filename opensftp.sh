@@ -10,6 +10,10 @@ GROUP=sftponly
 HOMEDIR=/export/sftp/$USER
 PORT=20000
 HOST=` cat /etc/sysconfig/network-scripts/ifcfg-*  |grep IPADDR=172 |cut -f 2 -d =`
+
+if ! which mkpasswd ;then
+	yum -y install expece
+fi
 PASSWD=`mkpasswd -l 12 -s 0`
 
 
@@ -18,14 +22,15 @@ if ! grep -q 20000 /etc/ssh/sshd_config;then
 	echo "restart sshd service"
 fi
 
-if ! grep -q internal-sftp /etc/ssh/sshd_cofig; then
-	sed -i '/sftp-server/s/^S/^#S/' /etc/ssh/sshd_config
-	echo "Subsystem       sftp     internal-sftp" >> /etc/ssh/ssd_config
+if ! grep -q internal-sftp /etc/ssh/sshd_config; then
+	sed -i '/sftp-server/s/^S/#S/' /etc/ssh/sshd_config
+	echo "Subsystem       sftp     internal-sftp" >> /etc/ssh/sshd_config
         echo " 		Match Group sftponly "        >> /etc/ssh/sshd_config
         echo " 		ChrootDirectory %h"           >> /etc/ssh/sshd_config
+        echo "restart sshd service"
 fi
 
-if ! grep -q sftponly /etc/groups;then
+if ! grep -q sftponly /etc/group;then
 	groupadd $GROUP
 fi
 
