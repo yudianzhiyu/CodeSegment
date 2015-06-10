@@ -1,0 +1,1 @@
+wsman invoke -a BootToPXE  http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/root/dcim/DCIM_OSDeploymentService?CreationClassName=DCIM_OSDeploymentService,Name=DCIM:OSDeploymentService,SystemCreationClassName=DCIM_ComputerSystem,SystemName=DCIM:ComputerSystem -h 10.24.219.65 -V -v -c dummy.cert -P 443 -u root -p calvin -j utf-8 -y basic
