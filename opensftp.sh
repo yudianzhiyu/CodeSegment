@@ -18,7 +18,7 @@ PASSWD=`mkpasswd -l 12 -s 0`
 
 
 if ! grep -q 20000 /etc/ssh/sshd_config;then
-	echo "Port=20000" >> /etc/ssh/sshd_config
+	echo "Port 20000" >> /etc/ssh/sshd_config
 	echo "restart sshd service"
 fi
 
@@ -40,6 +40,7 @@ if [ $? -eq 0 ]; then
 	exit 127
 fi
 
+mkdir -p /export/sftp
 useradd -G $GROUP -d $HOMEDIR -s /sbin/nologin $USER
 mkdir -p $HOMEDIR/upload
 chown root:root $HOMEDIR/

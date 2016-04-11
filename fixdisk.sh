@@ -34,5 +34,6 @@ newuuid=`ls /dev/disk/by-uuid/ -l |fgrep /sd${diskname} |cut -f 9  -d " "`
 
 echo "old uuid : $olduuid"
 echo "new uuid : $newuuid"
-#sed -i "s/$olduuid/$newuuid/" /etc/fstab
+sed -i "s/$olduuid/$newuuid/" /etc/fstab
 mount -a
+chown -R hdp.hadoop $mountpath
