@@ -24,6 +24,7 @@ echo  "/dev/emcpowera1         /redo                   ext4    defaults        0
 echo  "/dev/emcpowerb1         /data                   ext4    defaults        0       0" >> /etc/fstab
 
 wait
+
 mount -a
 clear
 #mount |grep emc
